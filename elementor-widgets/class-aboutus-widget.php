@@ -226,7 +226,18 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 	}
 
 	protected function render() {
-		$settings = $this->get_settings_for_display();
+		$settings  = $this->get_settings_for_display();
+		$image_url = ! empty( $settings['widget_image']['url'] ) ? $settings['widget_image']['url'] : '';
+		// Get heading and paragraph values
+		$heading_one = $settings['heading_one'];
+		// Check if heading_one_color is set and assign it, otherwise use a default value
+		$heading_one_color = ! empty( $settings['heading_one_color'] ) ? $settings['heading_one_color'] : '';
+// Check if heading_two_color is set and assign it, otherwise use a default value
+		$heading_two_color = ! empty( $settings['heading_two_color'] ) ? $settings['heading_two_color'] : '';
+		$heading_two          = $settings['heading_two'];
+		$heading_two_html_tag = $settings['heading_two_html_tag'];
+		$paragraph_one = $settings['paragraph_one'];
+		$paragraph_two = $settings['paragraph_two'];
 		include get_stylesheet_directory() . '/elementor-templates/custom-aboutus-template.php';
 	}
 

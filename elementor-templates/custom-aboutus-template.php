@@ -12,42 +12,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 		<div class="absolute  transform translate-x-[50%] ml-[-1950px] pt-[5px] mq925:relative mq925:m-0 mq925:p-0 mq925:transform-unset">
-			<img class="w-[575px] h-[774px]  " alt="" src="/wp-content/themes/fractal/fractal/build/modern-rustic-serenity-bathroom.webp">
+			 <img class="w-[575px] h-[774px]" alt="" src="<?php echo esc_url($image_url); ?>">
 		</div>
 
 
 		<div class="w-full max-w-[975px] ml-[175px] h-full mq925:ml-0 w-calc-100vw-minus-50px mq925:mb-[100px]">
 			<div class="flex-1 flex flex-col items-start justify-start gap-[30px] pl-[75px] pt-[95px]
 		mq925:pl-0 mq925:pt-[40px] ">
-				<div class="self-stretch relative tracking-[0.25em] leading-[22px] uppercase text-general-1-primary">
-					About Us
+				<div class="self-stretch relative tracking-[0.25em] leading-[22px] uppercase text-general-1-primary" style="color: <?php echo esc_attr($heading_one_color); ?>;">
+					 <?php echo esc_html($heading_one); ?>
 				</div>
-				<h2 class="self-stretch relative text-59xl  tracking-[-0.04em] leading-[84px] text-general-white mq925:text-41xl">
-					Your Vision, Our Expertise
-				</h2>
-				<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-white">
-					Fractal is a Dubai-based leading interior design company dedicated
-					to creating exceptional spaces (home, villa, hotel fit out works,
-					offices, commercial spaces, etc) that reflect your unique taste.
-				</div>
-				<div class="self-stretch relative leading-[26px] font-body-b6-merriweather-11 text-elements-neutral">
-					<p class="m-0">
-						Our design philosophy is deeply rooted in functionality
-						and elegance. We take the time to understand your lifestyle
-						and needs. From there, we create interiors that are not only
-						visually stunning but also perfectly suited to your
-						day-to-day life.
-					</p>
-					<p class="m-0">&nbsp;</p>
-					<p class="m-0">
-						What makes Fractal stand out is our commitment to personalized
-						service. We know every client is different, so we approach each
-						project with fresh eyes. Whether you’re after a minimalist
-						renovation, a fit-out with a touch of luxury, or a cozy retreat,
-						we have the expertise to create a space (including furniture
-						and other elements) that truly speaks to you.
-					</p>
-				</div>
+
+				<<?php echo esc_html($heading_two_html_tag); ?> class="self-stretch relative text-59xl tracking-[-0.04em] leading-[84px] text-general-white mq925:text-41xl heading-two" style="color: <?php echo esc_attr($heading_two_color); ?>;">
+                    <?php echo esc_html($heading_two); ?>
+                </<?php echo esc_html($heading_two_html_tag); ?>>
+
+			   <?php echo $paragraph_one; ?>
+			   <?php echo $paragraph_two; ?>
+
 				<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
 
 
