@@ -1,0 +1,48 @@
+---
+title: projects
+permalink: projects.html
+---
+
+<!DOCTYPE html>
+<html>
+{% include "head.html" %} <!-- Include the head component -->
+
+
+<body>
+<div
+		class="w-full relative bg-general-white overflow-hidden
+      flex flex-col items-start justify-start leading-[normal] tracking-[normal]"
+>
+	{% include "header.html" %}
+	{% include "banners/projects-banner.html" %}
+	<section  class="self-stretch  flex flex-col items-center justify-center ">
+		<div id="service-section-three" class="container mx-auto px-4 max-w-[1170px] w-full py-[50px]">
+			<div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-10">
+				<div class="service-item">
+					<a href="/family-sitting-room-design-work">
+						<img class="w-full mb-5 rounded-lg max-w-full align-middle border-none" src="images/family-sitting-room-design.webp" alt="Family Sitting Room Design Work">
+					</a>
+					<div class="srv-box-info px-2 pb-12 transition-all ease-in-out duration-500">
+						<h5 class="h5 hover:text-general-1-primary">
+							<a href="/family-sitting-room-design-work"
+							   class="text-gray-600 [text-decoration:none] transition duration-300">Family Sitting Room Design Work
+							</a></h5>
+						<p></p>
+						<p>From dramatic contemporary designs to striking opulent developments and eclectic colorful home, we have a fascinating family sitting room design portfolio.</p>
+						<p ></p>
+						<a href="/family-sitting-room-design-work"
+						   class="btn btn-prm servicecard-btn [text-decoration:none]" role="button" aria-pressed="true">Read More
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+
+
+	{% include "footer2.html" %}
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
+const chokidar = require('chokidar');
+
+// Supported image extensions
+const supportedExtensions = ['.png', '.jpg', '.jpeg', '.svg'];
+
+// Directory paths
+const inputDir = 'src/public'; // Adjust to your input directory
+const outputDir = 'dist/images'; // Adjust to your output directory
+const htmlDir = './dist'; // Directory where your built HTML files are located
+
+// Ensure output directory exists
+if (!fs.existsSync(outputDir)) {
+	fs.mkdirSync(outputDir, {recursive: true});
+}
+
+// Function to convert a single image to WebP
+function convertImage(file) {
+	const ext = path.extname(file).toLowerCase();
+
+	// Skip non-image files
+	if (!supportedExtensions.includes(ext)) {
+		console.log(`Skipping unsupported file: ${file}`);
+		return;
+	}
+
+	const inputFile = path.join(inputDir, file);
+	const outputFile = path.join(outputDir, `${path.parse(file).name}.webp`);
+
+	// Skip files larger than a certain size (e.g., 2 MB)
+	const stats = fs.statSync(inputFile);
+	if (stats.size > 2 * 1024 * 1024) {
+		console.log(`Skipping large file: ${file}`);
+		return;
+	}
+
+	// Process only valid images
+	sharp(inputFile)
+		.webp({quality: 75})
+		.toFile(outputFile)
+		.then(() => console.log(`Converted ${file} to WebP`))
+		.catch(err => {
+			if (err.message.includes('corrupt header') || err.message.includes('Resource limit exceeded')) {
+				console.log(`Skipping problematic file: ${file}`);
+			} else {
+				console.error(`Error processing file ${file}:`, err);
+			}
+		});
+}
+
+// Function to update HTML image links to WebP
+// Function to update HTML image links to include 'images/' and change extensions to '.webp'
+function updateHtmlImageLinks() {
+	fs.readdirSync(htmlDir).forEach(file => {
+		if (path.extname(file) === '.html') {
+			const htmlFilePath = path.join(htmlDir, file);
+			let htmlContent = fs.readFileSync(htmlFilePath, 'utf-8');
+
+			// Regular expression to find image sources
+			const imgSrcRegex = /(<img[^>]+src=["'])([^"']+\.(png|jpg|jpeg|svg))(["'][^>]*>)/gi;
+
+			// Replace image paths in the HTML content
+			htmlContent = htmlContent.replace(imgSrcRegex, (match, p1, p2, p3, p4) => {
+				// Extract the filename without extension
+				const filename = path.basename(p2, path.extname(p2));
+				// Construct the new image path
+				const newPath = `images/${filename}.webp`;
+				return `${p1}${newPath}${p4}`;
+			});
+
+			// Write the updated HTML content back to the file
+			fs.writeFileSync(htmlFilePath, htmlContent, 'utf-8');
+			console.log(`Updated image links in: ${file}`);
+		}
+	});
+}
+
+
+// Initial conversion and HTML update
+function runConversion() {
+	fs.readdirSync(inputDir).forEach(file => {
+		convertImage(file);
+	});
+	updateHtmlImageLinks();
+}
+
+runConversion();
+
+// Watch for changes if '--watch' argument is provided
+if (process.argv.includes('--watch')) {
+	// Watch input directory for changes
+	chokidar.watch(inputDir).on('all', (event, filePath) => {
+		if (event === 'add' || event === 'change') {
+			const file = path.basename(filePath);
+			console.log(`File ${event}: ${file}`);
+			convertImage(file);
+		}
+	});
+
+	// Watch HTML directory for changes
+	chokidar.watch(htmlDir).on('change', (filePath) => {
+		const file = path.basename(filePath);
+		if (path.extname(file) === '.html') {
+			console.log(`HTML file changed: ${file}`);
+			updateHtmlImageLinks();
+		}
+	});
+}

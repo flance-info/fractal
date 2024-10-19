@@ -1,0 +1,58 @@
+<div class="relative z-[11111111111111] stm-f" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="myModal" style="display: none;">
+	<div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+	<div class="fixed inset-0 z-10 overflow-y-auto">
+		<div class="flex items-start justify-center min-h-full p-4 pt-[40px] text-center sm:items-center sm:p-0">
+			<div class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+				<div class="bg-general-1-primary ">
+					<div class="sm:flex sm:items-start ">
+						<div class="self-stretch flex flex-row items-start justify-start flex-wrap content-start
+						gap-[62px] max-w-full text-gray-400 mq450:gap-[15px] mq925:gap-[31px]">
+
+							<div class="flex-1 flex flex-col items-start justify-start box-border max-w-[400px] min-w-[400px] max-w-full p-[40px] mq450:min-w-[300px]">
+								<div class="self-stretch flex flex-col items-start justify-start gap-[18px]">
+									<div class="self-stretch flex flex-col items-center justify-center gap-5 mq1400:flex-wrap">
+										<input class="stm-contact-input" placeholder="Your First Name" type="text">
+
+										<input class="stm-contact-input" placeholder="Your Email Address" type="text">
+										<input class="stm-contact-input" placeholder="Phone number" type="text">
+
+										<select class="stm-contact-select">
+											<option value="" disabled="" selected="">Project type</option>
+											<option value="type1">Type 1</option>
+											<option value="type2">Type 2</option>
+											<option value="type3">Type 3</option>
+										</select>
+
+										<textarea class="stm-contact-input" placeholder="Your Message" rows="{7}" cols="{31}">
+										</textarea>
+
+										<button class="flex flex-row items-center justify-start relative gap-4 text-right text-base w-[70px] h-[100px]">
+											<div class="arrow-container">
+												<span class="text tracking-[0.25em] leading-[22px]  uppercase z-[1]">Submit</span>
+												<div class="circle">
+													<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="images/navigation2.webp">
+													<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="images/moved-arrow.webp">
+												</div>
+
+
+											</div>
+										</button>
+
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<button type="button" class="absolute top-4 right-4 text-white bg-transparent focus:outline-none" onclick="closeModal()">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
