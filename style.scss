@@ -10,18 +10,22 @@
  * Version: 1.0
  */
 
+
 .elementor-element.e-con-full.e-grid.e-con {
     padding: 0px;
 }
-
-
+.stm-gap-0 {
+    gap: 0px;
+}
 .error404 .text-general-white a {
     --tw-text-opacity: 1;
     color: black;
 }
+
 .error404 header{
     margin-bottom: 0px;
 }
+
 .error404 .text-general-white button a {
     --tw-text-opacity: 1;
     color: #fff;
@@ -33,12 +37,24 @@
 .wpcf7-response-output {
     display: none;
 }
+
 .stm-margin-top {
         margin-top: -15px;
     }
-
+a.stm-gray:hover {
+    color: gray;
+}
 @media (max-width: 925px) {
     body .stm-margin-top {
         margin-top: 130px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    body
+    .elementor-949 .elementor-element.elementor-element-25f122c {
+        --e-con-grid-template-columns: repeat(1, 1fr);
+        --e-con-grid-template-rows: unset;
+        --grid-auto-flow: row;
     }
 }
