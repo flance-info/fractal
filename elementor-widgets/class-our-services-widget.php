@@ -201,7 +201,7 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 						handles every step, from breaking ground to handing over the keys.
 						We keep a close eye on quality, stick to timelines, and manage
 						your budgets smartly.',
-						'paragraph_2' => '	<p class="m-0">
+						'paragraph_2' => '<p class="m-0">
 							Our works include on-site inspections, tracking progress,
 							ensuring top-notch quality, and risk management. We work closely
 							with contractors, subcontractors, and clients to keep everything
@@ -284,11 +284,9 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 		);
 		// Service First Paragraph  Control
 // Add First Paragraph Controls
-$this->add_paragraph_controls( $service_number, 1, 'First', $defaults['description'] );
-
+		$this->add_paragraph_controls( $service_number, 1, 'First', $defaults['paragraph_1'] );
 // Add Second Paragraph Controls
-$this->add_paragraph_controls( $service_number, 2, 'Second', 'Default second paragraph content here' );
-
+		$this->add_paragraph_controls( $service_number, 2, 'Second', $defaults['paragraph_2'] );
 		// Background Image Control
 		$this->add_control(
 				"service_{$service_number}_bg_image",
@@ -337,32 +335,28 @@ $this->add_paragraph_controls( $service_number, 2, 'Second', 'Default second par
 	}
 
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-		// Service 1 Data
-		$service_1_title       = $settings['service_1_title'];
-		//$service_1_description = $settings['service_1_description'];
-		$service_1_bg_image    = ! empty( $settings['service_1_bg_image']['url'] ) ? esc_url( $settings['service_1_bg_image']['url'] ) : '';
-		// Service 2 Data
-		$service_2_title       = $settings['service_2_title'];
-		//$service_2_description = $settings['service_2_description'];
-		$service_2_bg_image    = ! empty( $settings['service_2_bg_image']['url'] ) ? esc_url( $settings['service_2_bg_image']['url'] ) : '';
-		// Service 3 Data
-		$service_3_title       = $settings['service_3_title'];
-		//$service_3_description = $settings['service_3_description'];
-		$service_3_bg_image    = ! empty( $settings['service_3_bg_image']['url'] ) ? esc_url( $settings['service_3_bg_image']['url'] ) : '';
-		// Service 4 Data
-		$service_4_title       = $settings['service_4_title'];
-		//$service_4_description = $settings['service_4_description'];
-		$service_4_bg_image    = ! empty( $settings['service_4_bg_image']['url'] ) ? esc_url( $settings['service_4_bg_image']['url'] ) : '';
-		// Add inline editing attributes
-		$this->add_inline_editing_attributes( 'service_1_title', 'none' );
-		//$this->add_inline_editing_attributes( 'service_1_description', 'advanced' );
-		$this->add_inline_editing_attributes( 'service_2_title', 'none' );
-		//$this->add_inline_editing_attributes( 'service_2_description', 'advanced' );
-		$this->add_inline_editing_attributes( 'service_3_title', 'none' );
-		//$this->add_inline_editing_attributes( 'service_3_description', 'advanced' );
-		$this->add_inline_editing_attributes( 'service_4_title', 'none' );
-		//$this->add_inline_editing_attributes( 'service_4_description', 'advanced' );
+		$settings    = $this->get_settings_for_display();
+		$label_one   = $settings['label_one'];
+		$heading     = $settings['heading'];
+		$heading_tag = $settings['heading_html_tag'];
+
+		$this->add_inline_editing_attributes( 'label_one', 'none' );
+		$this->add_inline_editing_attributes( 'heading', 'none' );
+		$services = [];
+		for ( $i = 1; $i <= 4; $i ++ ) {
+			$services[ $i ] = [
+					'title'       => $settings["service_{$i}_title"],
+					'bg_image'    => ! empty( $settings["service_{$i}_bg_image"]['url'] ) ? esc_url( $settings["service_{$i}_bg_image"]['url'] ) : '',
+					'paragraph_1' => $settings["service_{$i}_paragraph_1"],
+					'paragraph_2' => $settings["service_{$i}_paragraph_2"],
+					'title_tag'   => $settings["service_{$i}_title_tag"],
+			];
+			// Add inline editing attributes for title and paragraphs
+			$this->add_inline_editing_attributes( "service_{$i}_title", 'none' );
+			$this->add_inline_editing_attributes( "service_{$i}_paragraph_1", 'advanced' );
+			$this->add_inline_editing_attributes( "service_{$i}_paragraph_2", 'advanced' );
+
+		}
 		include get_stylesheet_directory() . '/elementor-templates/custom-ourservices-template.php';
 	}
 
