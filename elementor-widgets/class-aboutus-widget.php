@@ -26,19 +26,159 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 	}
 
 	protected function _register_controls() {
+		// Content Section
 		$this->start_controls_section(
-				'content_section',
+				'content_section_heading',
 				[
-						'label' => __( 'Content', 'fractal' ),
+						'label' => __( 'Content Label and Heading', 'fractal' ),
 						'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 				]
 		);
-
-		$this->add_group_control(
-				Group_Control_Typography::get_type(),
+		// Input field for the first heading (About Us)
+		$this->add_control(
+				'heading_one',
 				[
-						'name'     => 'typography',
-						'selector' => '{{WRAPPER}}  .elementor-heading-title',
+						'label'       => __( 'Widget Label', 'fractal' ),
+						'type'        => \Elementor\Controls_Manager::TEXT,
+						'default'     => __( 'About Us', 'fractal' ),
+						'label_block' => true,
+				]
+		);
+		// Color control for Heading One
+		$this->add_control(
+				'heading_one_color',
+				[
+						'label'     => __( 'Widget Label Color', 'fractal' ),
+						'type'      => \Elementor\Controls_Manager::COLOR,
+						'selectors' => [
+								'{{WRAPPER}} .heading-one' => 'color: {{VALUE}};',
+						],
+				]
+		);
+		// Typography control for Heading One
+		$this->add_group_control(
+				\Elementor\Group_Control_Typography::get_type(),
+				[
+						'name'     => 'heading_one_typography',
+						'label'    => __( 'Widget Label Typography', 'fractal' ),
+						'selector' => '{{WRAPPER}} .heading-one',
+				]
+		);
+		// Input field for the second heading (Your Vision, Our Expertise)
+		$this->add_control(
+				'heading_two',
+				[
+						'label'       => __( 'Heading', 'fractal' ),
+						'type'        => \Elementor\Controls_Manager::TEXT,
+						'default'     => __( 'Your Vision, Our Expertise', 'fractal' ),
+						'label_block' => true,
+				]
+		);
+		// HTML Tag selection for Heading Two
+		$this->add_control(
+				'heading_two_html_tag',
+				[
+						'label'   => __( 'HTML Tag for Heading', 'fractal' ),
+						'type'    => \Elementor\Controls_Manager::SELECT,
+						'options' => [
+								'h1' => __( 'H1', 'fractal' ),
+								'h2' => __( 'H2', 'fractal' ),
+								'h3' => __( 'H3', 'fractal' ),
+								'h4' => __( 'H4', 'fractal' ),
+								'h5' => __( 'H5', 'fractal' ),
+								'h6' => __( 'H6', 'fractal' ),
+						],
+						'default' => 'h2',
+				]
+		);
+		// Color control for Heading Two
+		$this->add_control(
+				'heading_two_color',
+				[
+						'label'     => __( 'Heading Color', 'fractal' ),
+						'type'      => \Elementor\Controls_Manager::COLOR,
+						'selectors' => [
+								'{{WRAPPER}} .heading-two' => 'color: {{VALUE}};',
+						],
+				]
+		);
+		// Typography control for Heading Two
+		$this->add_group_control(
+				\Elementor\Group_Control_Typography::get_type(),
+				[
+						'name'     => 'heading_two_typography',
+						'label'    => __( 'Heading Typography', 'fractal' ),
+						'selector' => '{{WRAPPER}} .heading-two',
+				]
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
+				'content_section_description',
+				[
+						'label' => __( 'Content Text', 'fractal' ),
+						'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+				]
+		);
+		$this->add_group_control(
+				\Elementor\Group_Control_Typography::get_type(),
+				[
+						'name'     => 'paragraph_one_typography',
+						'label'    => __( 'Paragraph Typography', 'fractal' ),
+						'selector' => '{{WRAPPER}} .heading-two',
+				]
+		);
+		$this->add_control(
+				'paragraph_one_color',
+				[
+						'label'     => __( 'Paragraph Color', 'fractal' ),
+						'type'      => \Elementor\Controls_Manager::COLOR,
+						'selectors' => [
+								'{{WRAPPER}} .heading-two' => 'color: {{VALUE}};',
+						],
+				]
+		);
+		// Editor field for the second paragraph (Our design philosophy...)
+		$this->add_control(
+				'paragraph_one',
+				[
+						'label'       => __( 'Paragraph One', 'fractal' ),
+						'type'        => \Elementor\Controls_Manager::WYSIWYG,
+						'default'     => __( 'Our design philosophy is deeply rooted in functionality and elegance...', 'fractal' ),
+						'label_block' => true,
+				]
+		);
+		$this->add_control(
+				'paragraph_one_separator',
+				[
+						'type' => \Elementor\Controls_Manager::DIVIDER,
+				]
+		);
+		$this->add_group_control(
+				\Elementor\Group_Control_Typography::get_type(),
+				[
+						'name'     => 'paragraph_two_typography',
+						'label'    => __( 'Paragraph Typography', 'fractal' ),
+						'selector' => '{{WRAPPER}} .heading-two',
+				]
+		);
+		$this->add_control(
+				'paragraph_two_color',
+				[
+						'label'     => __( 'Paragraph Color', 'fractal' ),
+						'type'      => \Elementor\Controls_Manager::COLOR,
+						'selectors' => [
+								'{{WRAPPER}} .heading-two' => 'color: {{VALUE}};',
+						],
+				]
+		);
+		// Editor field for the third paragraph (What makes Fractal stand out...)
+		$this->add_control(
+				'paragraph_two',
+				[
+						'label'       => __( 'Paragraph Two', 'fractal' ),
+						'type'        => \Elementor\Controls_Manager::WYSIWYG,
+						'default'     => __( 'What makes Fractal stand out is our commitment to personalized service...', 'fractal' ),
+						'label_block' => true,
 				]
 		);
 		$this->end_controls_section();
