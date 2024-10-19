@@ -143,7 +143,11 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 				[
 						'label'       => __( 'Paragraph One', 'fractal' ),
 						'type'        => \Elementor\Controls_Manager::WYSIWYG,
-						'default'     => __( 'Our design philosophy is deeply rooted in functionality and elegance...', 'fractal' ),
+						'default'     => __( '<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-white">
+					Fractal is a Dubai-based leading interior design company dedicated
+					to creating exceptional spaces (home, villa, hotel fit out works,
+					offices, commercial spaces, etc) that reflect your unique taste.
+				</div>', 'fractal' ),
 						'label_block' => true,
 				]
 		);
@@ -177,11 +181,48 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 				[
 						'label'       => __( 'Paragraph Two', 'fractal' ),
 						'type'        => \Elementor\Controls_Manager::WYSIWYG,
-						'default'     => __( 'What makes Fractal stand out is our commitment to personalized service...', 'fractal' ),
+						'default'     => __( '<div class="self-stretch relative leading-[26px] font-body-b6-merriweather-11 text-elements-neutral">
+					<p class="m-0">
+						Our design philosophy is deeply rooted in functionality
+						and elegance. We take the time to understand your lifestyle
+						and needs. From there, we create interiors that are not only
+						visually stunning but also perfectly suited to your
+						day-to-day life.
+					</p>
+					<p class="m-0">&nbsp;</p>
+					<p class="m-0">
+						What makes Fractal stand out is our commitment to personalized
+						service. We know every client is different, so we approach each
+						project with fresh eyes. Whether you’re after a minimalist
+						renovation, a fit-out with a touch of luxury, or a cozy retreat,
+						we have the expertise to create a space (including furniture
+						and other elements) that truly speaks to you.
+					</p>
+				</div>', 'fractal' ),
 						'label_block' => true,
 				]
 		);
 		$this->end_controls_section();
+		$this->start_controls_section(
+				'content_section_image',
+				[
+						'label' => __( 'Widget Image', 'fractal' ),
+						'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
+				]
+		);
+// Add image control with custom default image
+		$this->add_control(
+				'widget_image',
+				[
+						'label'   => __( 'Choose Image', 'fractal' ),
+						'type'    => \Elementor\Controls_Manager::MEDIA,
+						'default' => [
+								'url' => get_template_directory_uri() . '/fractal/build/modern-rustic-serenity-bathroom.webp',
+						],
+				]
+		);
+		$this->end_controls_section();
+
 	}
 
 	protected function render() {
