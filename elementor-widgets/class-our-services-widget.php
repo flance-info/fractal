@@ -113,6 +113,15 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 						],
 				]
 		);
+
+			$this->add_group_control(
+				Group_Control_Typography::get_type(),
+				[
+						'name'     => 'heading_typography',
+						'label'    => __( 'Widget Label Typography', 'fractal' ),
+						'selector' => '{{WRAPPER}} .heading',
+				]
+		);
 		$this->end_controls_section();
 		$default_values = [
 				1 => [
@@ -136,7 +145,7 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 							from the paintwork to the flooring and cabinetry, everything is
 							handled with a surprising degree of precision and care.
 						</p>',
-						'bg_image'    => get_template_directory_uri() . '/fractal/build/sample-bg1.webp',
+						'bg_image'    => get_template_directory_uri() . '/fractal/build/home_tables.png',
 				],
 				2 => [
 						'title'       => 'Expert Renovation Services',
@@ -164,7 +173,7 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 							your expectations, leaving you with a place you’ll love for
 							years to come.
 						</p>',
-						'bg_image'    => get_template_directory_uri() . '/fractal/build/sample-bg2.webp',
+						'bg_image'    => get_template_directory_uri() . '/fractal/build/frame-26587@3x.png',
 				],
 				3 => [
 						'title'       => 'Exquisite Furniture Services',
@@ -192,7 +201,7 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 							tailored to your needs. This way, we make sure your vision comes
 							to life just the way you imagined.
 						</p>',
-						'bg_image'    => get_template_directory_uri() . '/fractal/build/sample-bg3.webp',
+						'bg_image'    => get_template_directory_uri() . '/fractal/build/frame-26588@3x.png',
 				],
 				4 => [
 						'title'       => 'Construction Supervision',
@@ -220,7 +229,7 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 							can rest assured you’ll be paying for only the things you
 							absolutely need.
 						</p>',
-						'bg_image'    => get_template_directory_uri() . '/fractal/build/sample-bg4.webp',
+						'bg_image'    => get_template_directory_uri() . '/fractal/build/frame-26589@3x.png',
 				],
 		];
 		for ( $i = 1; $i <= 4; $i ++ ) {
@@ -339,7 +348,6 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 		$label_one   = $settings['label_one'];
 		$heading     = $settings['heading'];
 		$heading_tag = $settings['heading_html_tag'];
-
 		$this->add_inline_editing_attributes( 'label_one', 'none' );
 		$this->add_inline_editing_attributes( 'heading', 'none' );
 		$services = [];
@@ -355,77 +363,178 @@ class OurServices_Widget extends \Elementor\Widget_Base {
 			$this->add_inline_editing_attributes( "service_{$i}_title", 'none' );
 			$this->add_inline_editing_attributes( "service_{$i}_paragraph_1", 'advanced' );
 			$this->add_inline_editing_attributes( "service_{$i}_paragraph_2", 'advanced' );
-
 		}
 		include get_stylesheet_directory() . '/elementor-templates/custom-ourservices-template.php';
 	}
 
-	protected function _content_template() {
+	protected function render_service( $service, $i ) {
+		$title       = $service['title'];
+		$bg_image    = $service['bg_image'];
+		$paragraph_1 = $service['paragraph_1'];
+		$paragraph_2 = $service['paragraph_2'];
+		$title_tag   = $service['title_tag'];
 		?>
-		<#
-		view.addInlineEditingAttributes( 'service_1_title', 'none' );
-		view.addInlineEditingAttributes( 'service_1_description', 'advanced' );
-		view.addInlineEditingAttributes( 'service_2_title', 'none' );
-		view.addInlineEditingAttributes( 'service_2_description', 'advanced' );
-		view.addInlineEditingAttributes( 'service_3_title', 'none' );
-		view.addInlineEditingAttributes( 'service_3_description', 'advanced' );
-
-		var service_1_bg_image = settings.service_1_bg_image.url ? settings.service_1_bg_image.url : '';
-		var service_2_bg_image = settings.service_2_bg_image.url ? settings.service_2_bg_image.url : '';
-		var service_3_bg_image = settings.service_3_bg_image.url ? settings.service_3_bg_image.url : '';
-		#>
-
-		<div class="w-full">
-			<section class="self-stretch bg-elements-neutral-4 flex flex-col items-center justify-center py-[140px] gap-[80px] text-general-1-secondary">
-
-				<!-- Service 1 Output -->
-				<div class="self-stretch flex flex-row items-center justify-start gap-[60px] text-29xl mq925:flex-col">
-					<div class="flex-1 flex flex-col items-start justify-start gap-[30px]">
-						<h3 class="self-stretch relative tracking-[-0.02em] leading-[54px] font-medium service-1-title elementor-inline-editing" {{{ view.getRenderAttributeString( 'service_1_title' ) }}}>
-						{{{ settings.service_1_title }}}
-						</h3>
-						<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-1-secondary-variant service-1-description elementor-inline-editing" {{{ view.getRenderAttributeString(
-						'service_1_description' ) }}}>
-						{{{ settings.service_1_description }}}
-					</div>
-				</div>
-				<div class="flex-[0.8559] mq925:w-full mq925:min-h-[664px] h-[664px] flex flex-col items-end justify-end p-10 box-border gap-2.5 bg-cover bg-no-repeat bg-[top]" style="background-image: url('{{ service_1_bg_image }}');">
-				</div>
+		<<?php echo esc_html( $title_tag ); ?>  class="self-stretch relative tracking-[-0.02em] leading-[54px] font-medium <?php echo "service-{$i}-title" ?> elementor-inline-editing" <?php echo $this->get_render_attribute_string( "service_{$i}_title" ); ?>>
+			<?php echo esc_html( $title ); ?>
+		</<?php echo esc_html( $title_tag ); ?>>
+		<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-1-secondary-variant <?php echo "service-{$i}-paragraph-1" ?> elementor-inline-editing" <?php echo $this->get_render_attribute_string( "service_{$i}_paragraph_1" ); ?>>
+			<?php echo $paragraph_1; ?>
 		</div>
-
-		<!-- Service 2 Output -->
-		<div class="self-stretch flex flex-row items-center justify-start gap-[60px] text-29xl mq925:flex-col">
-			<div class="flex-1 flex flex-col items-start justify-start gap-[30px]">
-				<h3 class="self-stretch relative tracking-[-0.02em] leading-[54px] font-medium service-2-title elementor-inline-editing" {{{ view.getRenderAttributeString( 'service_2_title' ) }}}>
-				{{{ settings.service_2_title }}}
-				</h3>
-				<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-1-secondary-variant service-2-description elementor-inline-editing" {{{ view.getRenderAttributeString(
-				'service_2_description' ) }}}>
-				{{{ settings.service_2_description }}}
-			</div>
+		<div class="self-stretch relative text-base leading-[26px] font-body-b6-merriweather-11 text-elements-neutral <?php echo "service-{$i}-paragraph-2" ?> elementor-inline-editing" <?php echo $this->get_render_attribute_string( "service_{$i}_paragraph_2" ); ?>>
+			<?php echo $paragraph_2; ?>
 		</div>
-		<div class="flex-[0.8559] mq925:w-full mq925:min-h-[664px] h-[664px] flex flex-col items-end justify-end p-10 box-border gap-2.5 bg-cover bg-no-repeat bg-[top]" style="background-image: url('{{ service_2_bg_image }}');">
-		</div>
-		</div>
-
-		<!-- Service 3 Output -->
-		<div class="self-stretch flex flex-row items-center justify-start gap-[60px] text-29xl mq925:flex-col">
-			<div class="flex-1 flex flex-col items-start justify-start gap-[30px]">
-				<h3 class="self-stretch relative tracking-[-0.02em] leading-[54px] font-medium service-3-title elementor-inline-editing" {{{ view.getRenderAttributeString( 'service_3_title' ) }}}>
-				{{{ settings.service_3_title }}}
-				</h3>
-				<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-1-secondary-variant service-3-description elementor-inline-editing" {{{ view.getRenderAttributeString(
-				'service_3_description' ) }}}>
-				{{{ settings.service_3_description }}}
-			</div>
-		</div>
-		<div class="flex-[0.8559] mq925:w-full mq925:min-h-[664px] h-[664px] flex flex-col items-end justify-end p-10 box-border gap-2.5 bg-cover bg-no-repeat bg-[top]" style="background-image: url('{{ service_3_bg_image }}');">
-		</div>
-		</div>
-
-		</section>
-		</div>
-
 		<?php
 	}
+
+	protected function content_template() {
+    ?>
+    <#
+    // Helper function to render services
+    function renderService(i) {
+        var title = settings['service_' + i + '_title'];
+        var paragraph_1 = settings['service_' + i + '_paragraph_1'];
+        var paragraph_2 = settings['service_' + i + '_paragraph_2'];
+        var bg_image = settings['service_' + i + '_bg_image'].url ? settings['service_' + i + '_bg_image'].url : '';
+		var title_tag   = settings['service_' + i + '_title_tag'];
+
+        // Add inline editing attributes
+        view.addInlineEditingAttributes('service_' + i + '_title', 'none');
+        view.addInlineEditingAttributes('service_' + i + '_paragraph_1', 'advanced');
+        view.addInlineEditingAttributes('service_' + i + '_paragraph_2', 'advanced');
+
+        // Output HTML for the service
+        return `<${title_tag} class="self-stretch relative tracking-[-0.02em] leading-[54px] font-medium service-${i}-title elementor-inline-editing" ${view.getRenderAttributeString('service_' + i + '_title')}>
+                    ${title}
+                </${title_tag}>
+                <div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-1-secondary-variant service-${i}-paragraph-1 elementor-inline-editing" ${view.getRenderAttributeString('service_' + i + '_paragraph_1')}>
+                    ${paragraph_1}
+                </div>
+                <div class="self-stretch relative text-base leading-[26px] font-body-b6-merriweather-11 text-elements-neutral service-${i}-paragraph-2 elementor-inline-editing" ${view.getRenderAttributeString('service_' + i + '_paragraph_2')}>
+                    ${paragraph_2}
+                </div>
+        `;
+    }
+
+		 function renderImage(i) {
+
+        var bg_image = settings['service_' + i + '_bg_image'].url ? settings['service_' + i + '_bg_image'].url : '';
+
+
+
+        // Output HTML for the service
+        return ` style="background-image: url('${bg_image}');" `;
+    }
+
+    // Add inline editing attributes for general labels and headings
+    view.addInlineEditingAttributes('label_one', 'none');
+    view.addInlineEditingAttributes('heading', 'none');
+    #>
+
+    <div class="w-full">
+        <section class="self-stretch bg-elements-neutral-4 flex flex-col items-center justify-center py-[140px] gap-[80px] text-general-1-secondary mq925:px-[25px]">
+            <div class="w-full max-w-[1170px] flex flex-col gap-[100px]">
+                <div class="max-w-[991px] w-full flex flex-col items-center justify-start text-center text-general-1-primary mb-[-45px]">
+                    <!-- Label -->
+                    <div class="self-stretch relative tracking-[0.25em] leading-[22px] uppercase elementor-inline-editing" {{{ view.getRenderAttributeString('label_one') }}}>
+                        {{{ settings.label_one }}}
+                    </div>
+
+                    <!-- Heading -->
+                    <{{{ settings.heading_html_tag }}} class="self-stretch relative text-59xl tracking-[-0.04em] leading-[20px] text-general-1-secondary font-medium my-[64px] mq925:leading-[70px] mq925:my-[30px] heading elementor-inline-editing" {{{ view.getRenderAttributeString('heading') }}}>
+                        {{{ settings.heading }}}
+                    </{{{ settings.heading_html_tag }}}>
+                </div>
+
+
+		<div class="self-stretch flex flex-row items-center justify-start gap-[60px] text-29xl mq925:flex-col">
+			<div class="flex-1 flex flex-col items-start justify-start gap-[30px]">
+				 {{{ renderService(1) }}}
+
+			</div>
+			<div class="flex-[0.8559] mq925:w-full mq925:min-h-[664px] h-[664px] flex flex-col items-end justify-end p-10 box-border gap-2.5  bg-cover bg-no-repeat bg-[top] text-right text-base text-general-white"  {{{ renderImage(1) }}} >
+				<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
+
+
+					<div class="notrans arrow-container">
+						<span class="text tracking-[0.25em] leading-[22px]  uppercase z-[1]">Learn more</span>
+						<div class="circle">
+							<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
+							<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/orange_nav.webp">
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="self-stretch flex flex-row items-center justify-start gap-[60px] text-right text-general-white mq925:flex-col">
+
+			<div class="flex-[0.8559] mq925:w-full mq925:min-h-[664px]  h-[664px] flex flex-col items-end justify-end p-10 box-border gap-2.5  bg-cover bg-no-repeat bg-[top]"  {{{ renderImage(2) }}} >
+
+				<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
+
+
+					<div class="notrans arrow-container">
+						<span class="text tracking-[0.25em] leading-[22px]  uppercase z-[1]">Learn more</span>
+						<div class="circle">
+							<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
+							<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/orange_nav.webp">
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+			<div class="flex-1 flex flex-col items-start justify-start gap-[30px] text-left text-29xl text-general-1-secondary">
+				 {{{ renderService(2) }}}
+			</div>
+		</div>
+		<div class="self-stretch flex flex-row items-center justify-start gap-[60px] text-29xl mq925:flex-col">
+			<div class="flex-1 flex flex-col items-start justify-start gap-[30px]">
+				{{{ renderService(3) }}}
+			</div>
+			<div class="flex-[0.8559] mq925:w-full mq925:min-h-[664px]  h-[664px] flex flex-col items-end justify-end p-10 box-border gap-2.5 bg-cover bg-no-repeat bg-[top] text-right text-base text-general-white"  {{{ renderImage(3) }}} >
+				<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
+
+
+					<div class="notrans arrow-container">
+						<span class="text tracking-[0.25em] leading-[22px]  uppercase z-[1]">Learn more</span>
+						<div class="circle">
+							<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
+							<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/orange_nav.webp">
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="self-stretch flex flex-row items-center justify-start gap-[60px] text-right text-general-white mq925:flex-col">
+
+			<div class="self-stretch flex-[0.8559] mq925:w-full mq925:min-h-[664px]  flex flex-col items-end justify-end p-10 gap-2.5  bg-cover bg-no-repeat bg-[top]"  {{{ renderImage(4) }}} >
+				<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
+
+
+					<div class="notrans arrow-container">
+						<span class="text tracking-[0.25em] leading-[22px]  uppercase z-[1]">Learn more</span>
+						<div class="circle">
+							<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
+							<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/orange_nav.webp">
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="flex-1 flex flex-col items-start justify-start gap-[30px] text-left text-29xl text-general-1-secondary">
+				{{{ renderService(4) }}}
+			</div>
+		</div>
+            </div>
+        </section>
+    </div>
+    <?php
+}
+
+
 }
