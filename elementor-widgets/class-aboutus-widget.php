@@ -1,6 +1,5 @@
 <?php
 
-use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Typography;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,11 +23,16 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 	public function get_categories() {
 		return [ 'fractal' ];
 	}
-protected function is_dynamic_content(): bool {
-    return false;
-}
+
+	/**
+	 * Enable dynamic content for inline editing.
+	 */
+	protected function is_dynamic_content(): bool {
+		return true; // Must return true for inline editing to work
+	}
+
 	protected function _register_controls() {
-		// Content Section
+		// Content Section: Heading
 		$this->start_controls_section(
 				'content_section_heading',
 				[
@@ -36,7 +40,7 @@ protected function is_dynamic_content(): bool {
 						'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 				]
 		);
-		// Input field for the first heading (About Us)
+		// Widget Label (Heading One)
 		$this->add_control(
 				'heading_one',
 				[
@@ -44,12 +48,12 @@ protected function is_dynamic_content(): bool {
 						'type'        => \Elementor\Controls_Manager::TEXT,
 						'default'     => __( 'About Us', 'fractal' ),
 						'label_block' => true,
-					'dynamic' => [
-					'active' => true
-				],
+						'dynamic'     => [
+								'active' => true
+						],
 				]
 		);
-		// Color control for Heading One
+		// Widget Label Color
 		$this->add_control(
 				'heading_one_color',
 				[
@@ -58,18 +62,21 @@ protected function is_dynamic_content(): bool {
 						'selectors' => [
 								'{{WRAPPER}} .heading-one' => 'color: {{VALUE}};',
 						],
+						'dynamic'   => [
+								'active' => true
+						],
 				]
 		);
-		// Typography control for Heading One
+		// Widget Label Typography
 		$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 						'name'     => 'heading_one_typography',
 						'label'    => __( 'Widget Label Typography', 'fractal' ),
 						'selector' => '{{WRAPPER}} .heading-one',
 				]
 		);
-		// Input field for the second heading (Your Vision, Our Expertise)
+		// Heading Two
 		$this->add_control(
 				'heading_two',
 				[
@@ -77,12 +84,12 @@ protected function is_dynamic_content(): bool {
 						'type'        => \Elementor\Controls_Manager::TEXT,
 						'default'     => __( 'Your Vision, Our Expertise', 'fractal' ),
 						'label_block' => true,
-					'dynamic' => [
-					'active' => true
-				],
+						'dynamic'     => [
+								'active' => true
+						],
 				]
 		);
-		// HTML Tag selection for Heading Two
+		// HTML Tag for Heading Two
 		$this->add_control(
 				'heading_two_html_tag',
 				[
@@ -99,7 +106,7 @@ protected function is_dynamic_content(): bool {
 						'default' => 'h2',
 				]
 		);
-		// Color control for Heading Two
+		// Heading Two Color
 		$this->add_control(
 				'heading_two_color',
 				[
@@ -108,18 +115,22 @@ protected function is_dynamic_content(): bool {
 						'selectors' => [
 								'{{WRAPPER}} .heading-two' => 'color: {{VALUE}};',
 						],
+						'dynamic'   => [
+								'active' => true
+						],
 				]
 		);
-		// Typography control for Heading Two
+		// Heading Two Typography
 		$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 						'name'     => 'heading_two_typography',
 						'label'    => __( 'Heading Typography', 'fractal' ),
-						'selector' => '{{WRAPPER}} .paragraph_one',
+						'selector' => '{{WRAPPER}} .heading-two',
 				]
 		);
 		$this->end_controls_section();
+		// Content Section: Description
 		$this->start_controls_section(
 				'content_section_description',
 				[
@@ -127,14 +138,16 @@ protected function is_dynamic_content(): bool {
 						'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 				]
 		);
+		// Paragraph One Typography
 		$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 						'name'     => 'paragraph_one_typography',
 						'label'    => __( 'Paragraph Typography', 'fractal' ),
 						'selector' => '{{WRAPPER}} .paragraph_one',
 				]
 		);
+		// Paragraph One Color
 		$this->add_control(
 				'paragraph_one_color',
 				[
@@ -143,37 +156,41 @@ protected function is_dynamic_content(): bool {
 						'selectors' => [
 								'{{WRAPPER}} .paragraph_one' => 'color: {{VALUE}};',
 						],
+						'dynamic'   => [
+								'active' => true
+						],
 				]
 		);
-		// Editor field for the second paragraph (Our design philosophy...)
+		// Paragraph One (WYSIWYG)
 		$this->add_control(
 				'paragraph_one',
 				[
 						'label'       => __( 'Paragraph One', 'fractal' ),
 						'type'        => \Elementor\Controls_Manager::WYSIWYG,
-						'default'     => __( 'Fractal is a Dubai-based leading interior design company dedicated
-					to creating exceptional spaces (home, villa, hotel fit out works,
-					offices, commercial spaces, etc) that reflect your unique taste.', 'fractal' ),
+						'default'     => __( 'Fractal is a Dubai-based leading interior design company dedicated to creating exceptional spaces (home, villa, hotel fit out works, offices, commercial spaces, etc) that reflect your unique taste.', 'fractal' ),
 						'label_block' => true,
-					'dynamic' => [
-					'active' => true
-				],
+						'dynamic'     => [
+								'active' => true
+						],
 				]
 		);
+		// Separator
 		$this->add_control(
 				'paragraph_one_separator',
 				[
 						'type' => \Elementor\Controls_Manager::DIVIDER,
 				]
 		);
+		// Paragraph Two Typography
 		$this->add_group_control(
-				\Elementor\Group_Control_Typography::get_type(),
+				Group_Control_Typography::get_type(),
 				[
 						'name'     => 'paragraph_two_typography',
 						'label'    => __( 'Paragraph Typography', 'fractal' ),
 						'selector' => '{{WRAPPER}} .paragraph_two',
 				]
 		);
+		// Paragraph Two Color
 		$this->add_control(
 				'paragraph_two_color',
 				[
@@ -182,38 +199,42 @@ protected function is_dynamic_content(): bool {
 						'selectors' => [
 								'{{WRAPPER}} .paragraph_two' => 'color: {{VALUE}};',
 						],
+						'dynamic'   => [
+								'active' => true
+						],
 				]
 		);
-		// Editor field for the third paragraph (What makes Fractal stand out...)
+		// Paragraph Two (WYSIWYG)
 		$this->add_control(
 				'paragraph_two',
 				[
 						'label'       => __( 'Paragraph Two', 'fractal' ),
 						'type'        => \Elementor\Controls_Manager::WYSIWYG,
 						'default'     => __( '<p class="m-0">
-						Our design philosophy is deeply rooted in functionality
-						and elegance. We take the time to understand your lifestyle
-						and needs. From there, we create interiors that are not only
-						visually stunning but also perfectly suited to your
-						day-to-day life.
-					</p>
-					<p class="m-0">&nbsp;</p>
-					<p class="m-0">
-						What makes Fractal stand out is our commitment to personalized
-						service. We know every client is different, so we approach each
-						project with fresh eyes. Whether you’re after a minimalist
-						renovation, a fit-out with a touch of luxury, or a cozy retreat,
-						we have the expertise to create a space (including furniture
-						and other elements) that truly speaks to you.
-					</p>
-				', 'fractal' ),
+                    Our design philosophy is deeply rooted in functionality
+                    and elegance. We take the time to understand your lifestyle
+                    and needs. From there, we create interiors that are not only
+                    visually stunning but also perfectly suited to your
+                    day-to-day life.
+                </p>
+                <p class="m-0">&nbsp;</p>
+                <p class="m-0">
+                    What makes Fractal stand out is our commitment to personalized
+                    service. We know every client is different, so we approach each
+                    project with fresh eyes. Whether you’re after a minimalist
+                    renovation, a fit-out with a touch of luxury, or a cozy retreat,
+                    we have the expertise to create a space (including furniture
+                    and other elements) that truly speaks to you.
+                </p>
+                ', 'fractal' ),
 						'label_block' => true,
-					'dynamic' => [
-					'active' => true
-				],
+						'dynamic'     => [
+								'active' => true
+						],
 				]
 		);
 		$this->end_controls_section();
+		// Content Section: Image
 		$this->start_controls_section(
 				'content_section_image',
 				[
@@ -221,7 +242,7 @@ protected function is_dynamic_content(): bool {
 						'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
 				]
 		);
-// Add image control with custom default image
+		// Image Control with Custom Default Image
 		$this->add_control(
 				'widget_image',
 				[
@@ -230,10 +251,12 @@ protected function is_dynamic_content(): bool {
 						'default' => [
 								'url' => get_template_directory_uri() . '/fractal/build/modern-rustic-serenity-bathroom.webp',
 						],
+						'dynamic' => [
+								'active' => true
+						],
 				]
 		);
 		$this->end_controls_section();
-
 	}
 
 	protected function render() {
@@ -245,74 +268,75 @@ protected function is_dynamic_content(): bool {
 		$heading_two_html_tag = $settings['heading_two_html_tag'];
 		$paragraph_one        = $settings['paragraph_one'];
 		$paragraph_two        = $settings['paragraph_two'];
-		$this->add_inline_editing_attributes( 'heading_one');
-		$this->add_inline_editing_attributes( 'heading_two', 'basic' );
+		// Add inline editing attributes for inline editing
+		$this->add_inline_editing_attributes( 'heading_one', 'none' );
+		$this->add_inline_editing_attributes( 'heading_two', 'none' );
 		$this->add_inline_editing_attributes( 'paragraph_one', 'advanced' );
 		$this->add_inline_editing_attributes( 'paragraph_two', 'advanced' );
+		// Include the template
 		include get_stylesheet_directory() . '/elementor-templates/custom-aboutus-template.php';
 	}
 
-	protected function _content_template() {
+	protected function content_template() {
 		?>
-	<#
-view.addInlineEditingAttributes( 'heading_one' );
-view.addInlineEditingAttributes( 'heading_two');
-view.addInlineEditingAttributes( 'paragraph_one');
-view.addInlineEditingAttributes( 'paragraph_two');
+		<#
+		view.addInlineEditingAttributes( 'heading_one', 'none' );
+		view.addInlineEditingAttributes( 'heading_two', 'none' );
+		view.addInlineEditingAttributes( 'paragraph_one', 'advanced' );
+		view.addInlineEditingAttributes( 'paragraph_two', 'advanced' );
 
-var image_url = settings.widget_image.url;
-#>
+		var image_url = settings.widget_image.url ? settings.widget_image.url : '';
+		#>
 
-<div class="w-full">
-	<section class="self-stretch bg-general-1-secondary min-h-[774px] flex flex-row mq925:flex-col items-center text-general-1-secondary w-full justify-center gap-20 mq925:p-0">
+		<div class="w-full">
+			<section class="self-stretch bg-general-1-secondary min-h-[774px] flex flex-row mq925:flex-col items-center text-general-1-secondary w-full justify-center gap-20 mq925:p-0">
 
-		<!-- Image -->
-		<div class="absolute transform translate-x-[50%] ml-[-1950px] pt-[5px] mq925:relative mq925:m-0 mq925:p-0 mq925:transform-unset">
-			<img class="w-[575px] h-[774px]" alt="" src="{{ image_url }}">
-		</div>
-
-		<!-- Content Section -->
-		<div class="w-full max-w-[975px] ml-[175px] h-full mq925:ml-0 w-calc-100vw-minus-50px mq925:mb-[100px]">
-			<div class="flex-1 flex flex-col items-start justify-start gap-[30px] pl-[75px] pt-[95px] mq925:pl-0 mq925:pt-[40px]">
-
-				<!-- Heading One -->
-				<div class="self-stretch relative tracking-[0.25em] leading-[22px] uppercase text-general-1-primary heading-one" {{{ view.getRenderAttributeString( 'heading_one' ) }}}>
-					{{{ settings.heading_one }}}
+				<!-- Image -->
+				<div class="absolute transform translate-x-[50%] ml-[-1950px] pt-[5px] mq925:relative mq925:m-0 mq925:p-0 mq925:transform-unset">
+					<img class="w-[575px] h-[774px]" alt="" src="{{ image_url }}">
 				</div>
 
-				<!-- Heading Two -->
-				<{{{ settings.heading_two_html_tag }}} class="self-stretch relative text-59xl tracking-[-0.04em] leading-[84px] text-general-white mq925:text-41xl heading-two" {{{ view.getRenderAttributeString( 'heading_two' ) }}}>
+				<!-- Content Section -->
+				<div class="w-full max-w-[975px] ml-[175px] h-full mq925:ml-0 w-calc-100vw-minus-50px mq925:mb-[100px]">
+					<div class="flex-1 flex flex-col items-start justify-start gap-[30px] pl-[75px] pt-[95px] mq925:pl-0 mq925:pt-[40px]">
+
+						<!-- Heading One -->
+					<div class="self-stretch relative tracking-[0.25em] leading-[22px] uppercase text-general-1-primary heading-one elementor-inline-editing" {{{ view.getRenderAttributeString(	'heading_one' ) }}}>
+						{{{ settings.heading_one }}}
+					</div>
+
+					<!-- Heading Two -->
+					<{{{ settings.heading_two_html_tag }}} class="self-stretch relative text-59xl tracking-[-0.04em] leading-[84px] text-general-white mq925:text-41xl heading-two elementor-inline-editing" {{{ view.getRenderAttributeString( 'heading_two' ) }}}>
 					{{{ settings.heading_two }}}
 				</{{{ settings.heading_two_html_tag }}}>
 
 				<!-- Paragraph One -->
-				<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-white paragraph_one" {{{ view.getRenderAttributeString( 'paragraph_one' ) }}}>
-					{{{ settings.paragraph_one }}}
-				</div>
+				<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-white
+				paragraph_one elementor-inline-editing " {{{ view.getRenderAttributeString('paragraph_one' ) }}}>
+				{{{ settings.paragraph_one }}}
+		</div>
 
-				<!-- Paragraph Two -->
-				<div class="self-stretch relative leading-[26px] font-body-b6-merriweather-11 text-elements-neutral paragraph_two" {{{ view.getRenderAttributeString( 'paragraph_two' ) }}}>
-					{{{ settings.paragraph_two }}}
-				</div>
+		<!-- Paragraph Two -->
+		<div class="self-stretch relative leading-[26px] font-body-b6-merriweather-11 text-elements-neutral paragraph_two elementor-inline-editing" {{{ view.getRenderAttributeString( 'paragraph_two' ) }}}>
+		{{{ settings.paragraph_two }}}
+		</div>
 
-				<!-- Learn More Button -->
-				<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
-					<div class="arrow-container">
-						<span class="text tracking-[0.25em] leading-[22px] uppercase z-[1]">Learn more</span>
-						<div class="circle">
-							<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
-							<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/moved-arrow.webp">
-						</div>
-					</div>
+		<!-- Learn More Button -->
+		<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
+			<div class="arrow-container">
+				<span class="text tracking-[0.25em] leading-[22px] uppercase z-[1]">Learn more</span>
+				<div class="circle">
+					<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
+					<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/moved-arrow.webp">
 				</div>
-
 			</div>
 		</div>
 
-	</section>
-</div>
+		</div>
+		</div>
 
-
+		</section>
+		</div>
 		<?php
 	}
 }

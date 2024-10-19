@@ -19,6 +19,7 @@ function register_custom_banner_widget() {
 		require_once( get_stylesheet_directory() . '/elementor-widgets/class-gallery-widget.php' );
 		require_once( get_stylesheet_directory() . '/elementor-widgets/class-contactus-map-widget.php' );
 		require_once( get_stylesheet_directory() . '/elementor-widgets/class-contactus-form-widget.php' );
+		require_once( get_stylesheet_directory() . '/elementor-widgets/testin.php' );
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Custom_Banner_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Aboutus_Widget() );
@@ -31,6 +32,7 @@ function register_custom_banner_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \FractalGallery_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \ContactUsMap_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \ContactUsForm_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Inline_Editing_Widget() );
 
 	}
 }
