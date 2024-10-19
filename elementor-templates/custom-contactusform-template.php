@@ -1,14 +1,12 @@
 <?php
 
-global $post;
-$post_slug = $post->post_name;
-// Check if it's the front page or a page with a specific slug
-if ( is_front_page() || $post_slug === 'contact1111' ) {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+?>
 
-
-	?>
-
-	<section class="self-stretch bg-general-1-secondary flex flex-row items-center justify-start
+<div class="w-full">
+		<section class="self-stretch bg-general-1-secondary flex flex-row items-center justify-start
 		 box-border relative
 		max-w-full w-full text-center text-base text-general-white
 		font-button-space-grotesk mq925:py-[65px]
@@ -22,8 +20,7 @@ if ( is_front_page() || $post_slug === 'contact1111' ) {
 		</div>
 		<div class="ml-auto flex-1"></div>
 	</section>
+</div>
 
-	<?php
 
-}
-?>
+

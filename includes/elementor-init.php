@@ -15,6 +15,11 @@ function register_custom_banner_widget() {
 		require_once( get_stylesheet_directory() . '/elementor-widgets/class-our-brands-widget.php' );
 		require_once( get_stylesheet_directory() . '/elementor-widgets/class-types-projects-widget.php' );
 		require_once( get_stylesheet_directory() . '/elementor-widgets/class-interior-design-widget.php' );
+		require_once( get_stylesheet_directory() . '/elementor-widgets/class-latest-blogs-widget.php' );
+		require_once( get_stylesheet_directory() . '/elementor-widgets/class-gallery-widget.php' );
+		require_once( get_stylesheet_directory() . '/elementor-widgets/class-contactus-map-widget.php' );
+		require_once( get_stylesheet_directory() . '/elementor-widgets/class-contactus-form-widget.php' );
+		
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Custom_Banner_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Aboutus_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \OurServices_Widget() );
@@ -22,6 +27,10 @@ function register_custom_banner_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \OurBrands_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \TypesProjects_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \InteriorDesign_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \LatesBlogs_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \FractalGallery_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \ContactUsMap_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \ContactUsForm_Widget() );
 
 	}
 }
