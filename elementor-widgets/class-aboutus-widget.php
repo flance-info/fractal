@@ -24,7 +24,9 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 	public function get_categories() {
 		return [ 'fractal' ];
 	}
-
+protected function is_dynamic_content(): bool {
+    return false;
+}
 	protected function _register_controls() {
 		// Content Section
 		$this->start_controls_section(
@@ -42,6 +44,9 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 						'type'        => \Elementor\Controls_Manager::TEXT,
 						'default'     => __( 'About Us', 'fractal' ),
 						'label_block' => true,
+					'dynamic' => [
+					'active' => true
+				],
 				]
 		);
 		// Color control for Heading One
@@ -72,6 +77,9 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 						'type'        => \Elementor\Controls_Manager::TEXT,
 						'default'     => __( 'Your Vision, Our Expertise', 'fractal' ),
 						'label_block' => true,
+					'dynamic' => [
+					'active' => true
+				],
 				]
 		);
 		// HTML Tag selection for Heading Two
@@ -147,6 +155,9 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 					to creating exceptional spaces (home, villa, hotel fit out works,
 					offices, commercial spaces, etc) that reflect your unique taste.', 'fractal' ),
 						'label_block' => true,
+					'dynamic' => [
+					'active' => true
+				],
 				]
 		);
 		$this->add_control(
@@ -197,6 +208,9 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 					</p>
 				', 'fractal' ),
 						'label_block' => true,
+					'dynamic' => [
+					'active' => true
+				],
 				]
 		);
 		$this->end_controls_section();
@@ -231,61 +245,73 @@ class Aboutus_Widget extends \Elementor\Widget_Base {
 		$heading_two_html_tag = $settings['heading_two_html_tag'];
 		$paragraph_one        = $settings['paragraph_one'];
 		$paragraph_two        = $settings['paragraph_two'];
+		$this->add_inline_editing_attributes( 'heading_one');
+		$this->add_inline_editing_attributes( 'heading_two', 'basic' );
+		$this->add_inline_editing_attributes( 'paragraph_one', 'advanced' );
+		$this->add_inline_editing_attributes( 'paragraph_two', 'advanced' );
 		include get_stylesheet_directory() . '/elementor-templates/custom-aboutus-template.php';
 	}
 
 	protected function _content_template() {
 		?>
-		<# var image_url = settings.widget_image.url; #>
+	<#
+view.addInlineEditingAttributes( 'heading_one' );
+view.addInlineEditingAttributes( 'heading_two');
+view.addInlineEditingAttributes( 'paragraph_one');
+view.addInlineEditingAttributes( 'paragraph_two');
 
-		<div class="w-full">
-			<section class="self-stretch bg-general-1-secondary min-h-[774px] flex flex-row mq925:flex-col items-center text-general-1-secondary w-full justify-center gap-20 mq925:p-0">
+var image_url = settings.widget_image.url;
+#>
 
-				<!-- Image -->
-				<div class="absolute transform translate-x-[50%] ml-[-1950px] pt-[5px] mq925:relative mq925:m-0 mq925:p-0 mq925:transform-unset">
-					<img class="w-[575px] h-[774px]" alt="" src="{{ image_url }}">
-				</div>
+<div class="w-full">
+	<section class="self-stretch bg-general-1-secondary min-h-[774px] flex flex-row mq925:flex-col items-center text-general-1-secondary w-full justify-center gap-20 mq925:p-0">
 
-				<!-- Content Section -->
-				<div class="w-full max-w-[975px] ml-[175px] h-full mq925:ml-0 w-calc-100vw-minus-50px mq925:mb-[100px]">
-					<div class="flex-1 flex flex-col items-start justify-start gap-[30px] pl-[75px] pt-[95px] mq925:pl-0 mq925:pt-[40px]">
-
-						<!-- Heading One -->
-						<div class="self-stretch relative tracking-[0.25em] leading-[22px] uppercase text-general-1-primary heading-one" style="color: {{ settings.heading_one_color }};">
-							{{{ settings.heading_one }}}
-						</div>
-
-						<!-- Heading Two -->
-						<{{{ settings.heading_two_html_tag }}} class="self-stretch relative text-59xl tracking-[-0.04em] leading-[84px] text-general-white mq925:text-41xl heading-two">
-						{{{ settings.heading_two }}}
-						</{{{ settings.heading_two_html_tag }}}>
-
-					<!-- Paragraph One -->
-					<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-white paragraph_one">
-						{{{ settings.paragraph_one }}}
-					</div>
-
-					<!-- Paragraph Two -->
-					<div class="self-stretch relative leading-[26px] font-body-b6-merriweather-11 text-elements-neutral paragraph_two">
-						{{{ settings.paragraph_two }}}
-					</div>
-
-					<!-- Learn More Button -->
-					<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
-						<div class="arrow-container">
-							<span class="text tracking-[0.25em] leading-[22px] uppercase z-[1]">Learn more</span>
-							<div class="circle">
-								<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
-								<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/moved-arrow.webp">
-							</div>
-						</div>
-					</div>
-
-				</div>
+		<!-- Image -->
+		<div class="absolute transform translate-x-[50%] ml-[-1950px] pt-[5px] mq925:relative mq925:m-0 mq925:p-0 mq925:transform-unset">
+			<img class="w-[575px] h-[774px]" alt="" src="{{ image_url }}">
 		</div>
 
-		</section>
+		<!-- Content Section -->
+		<div class="w-full max-w-[975px] ml-[175px] h-full mq925:ml-0 w-calc-100vw-minus-50px mq925:mb-[100px]">
+			<div class="flex-1 flex flex-col items-start justify-start gap-[30px] pl-[75px] pt-[95px] mq925:pl-0 mq925:pt-[40px]">
+
+				<!-- Heading One -->
+				<div class="self-stretch relative tracking-[0.25em] leading-[22px] uppercase text-general-1-primary heading-one" {{{ view.getRenderAttributeString( 'heading_one' ) }}}>
+					{{{ settings.heading_one }}}
+				</div>
+
+				<!-- Heading Two -->
+				<{{{ settings.heading_two_html_tag }}} class="self-stretch relative text-59xl tracking-[-0.04em] leading-[84px] text-general-white mq925:text-41xl heading-two" {{{ view.getRenderAttributeString( 'heading_two' ) }}}>
+					{{{ settings.heading_two }}}
+				</{{{ settings.heading_two_html_tag }}}>
+
+				<!-- Paragraph One -->
+				<div class="self-stretch relative text-5xl tracking-[-0.01em] leading-[30px] font-medium text-general-white paragraph_one" {{{ view.getRenderAttributeString( 'paragraph_one' ) }}}>
+					{{{ settings.paragraph_one }}}
+				</div>
+
+				<!-- Paragraph Two -->
+				<div class="self-stretch relative leading-[26px] font-body-b6-merriweather-11 text-elements-neutral paragraph_two" {{{ view.getRenderAttributeString( 'paragraph_two' ) }}}>
+					{{{ settings.paragraph_two }}}
+				</div>
+
+				<!-- Learn More Button -->
+				<div onclick="openModal()" class="flex flex-row items-center justify-start relative gap-4 text-right text-base">
+					<div class="arrow-container">
+						<span class="text tracking-[0.25em] leading-[22px] uppercase z-[1]">Learn more</span>
+						<div class="circle">
+							<img class="stm-mb w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/navigation2.webp">
+							<img class="stm-mb1 w-[70px] relative h-[70px]" alt="" src="/wp-content/themes/fractal/fractal/build/moved-arrow.webp">
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</div>
+
+	</section>
+</div>
+
 
 		<?php
 	}
